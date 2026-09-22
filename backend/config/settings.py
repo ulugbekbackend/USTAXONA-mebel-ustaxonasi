@@ -88,7 +88,10 @@ else:
     }
 
 AUTH_PASSWORD_VALIDATORS = [
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 LANGUAGE_CODE = "uz"
@@ -147,7 +150,8 @@ SPECTACULAR_SETTINGS = {
 # --- Xavfsizlik (production) ---
 # USE_HTTPS=True faqat sayt haqiqatan HTTPS orqali (Traefik/sertifikat bilan) ochilganda.
 # Oddiy http://localhost:8080 da True bo'lsa — cheksiz redirect va admin'ga kirib bo'lmaydi.
-USE_HTTPS = config("USE_HTTPS", default=not DEBUG, cast=bool)
+# Testlar (CI'da .env yo'q, DEBUG=False) test client'ning http so'rovlarini redirect qilmasin.
+USE_HTTPS = config("USE_HTTPS", default=not DEBUG, cast=bool) and not TESTING
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 if USE_HTTPS:
     SECURE_SSL_REDIRECT = True
