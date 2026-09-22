@@ -1,0 +1,463 @@
+{
+  "images": {
+    "hero": "https://image.qwenlm.ai/generated-images/47c4b030-fb30-4c5f-9747-c2370dbd1fa3/_result.png",
+    "sofa": "https://image.qwenlm.ai/generated-images/dd77339e-83a4-4fbe-b17a-422d6cf7b9f8/_result.png",
+    "armchair": "https://image.qwenlm.ai/generated-images/2f29a921-0109-45d5-881a-85ebc88f9d52/_result.png",
+    "table": "https://image.qwenlm.ai/generated-images/083daa18-2940-4f3e-b999-17042c1b7503/_result.png",
+    "chairs": "https://image.qwenlm.ai/generated-images/e1c71237-4e6c-43df-b1d5-c4e2a2507083/_result.png",
+    "bed": "https://image.qwenlm.ai/generated-images/38998553-5807-49ba-8038-354e493adf93/_result.png",
+    "wardrobe": "https://image.qwenlm.ai/generated-images/eca14de8-21a8-4bd3-9dff-7d17cc8ac64a/_result.png",
+    "coffee": "https://image.qwenlm.ai/generated-images/9ad377bc-2f76-4837-b964-c0f6fe3c6aa5/_result.png",
+    "shelf": "https://image.qwenlm.ai/generated-images/c0156861-0581-4d9d-801a-e4fec3e95c43/_result.png",
+    "workshop": "https://image.qwenlm.ai/generated-images/031fd2e6-4434-4524-8691-840cfa3c122b/_result.png"
+  },
+  "categories": [
+    {
+      "slug": "mehmonxona",
+      "name": "Mehmonxona",
+      "parent": null,
+      "image": "hero"
+    },
+    {
+      "slug": "divanlar",
+      "name": "Divanlar",
+      "parent": "mehmonxona",
+      "image": "sofa"
+    },
+    {
+      "slug": "kreslolar",
+      "name": "Kreslolar",
+      "parent": "mehmonxona",
+      "image": "armchair"
+    },
+    {
+      "slug": "stoliklar",
+      "name": "Stoliklar",
+      "parent": "mehmonxona",
+      "image": "coffee"
+    },
+    {
+      "slug": "oshxona",
+      "name": "Oshxona",
+      "parent": null,
+      "image": "table"
+    },
+    {
+      "slug": "stullar",
+      "name": "Stullar",
+      "parent": "oshxona",
+      "image": "chairs"
+    },
+    {
+      "slug": "yotoqxona",
+      "name": "Yotoqxona",
+      "parent": null,
+      "image": "bed"
+    },
+    {
+      "slug": "karavotlar",
+      "name": "Karavotlar",
+      "parent": "yotoqxona",
+      "image": "bed"
+    },
+    {
+      "slug": "shkaflar",
+      "name": "Shkaflar",
+      "parent": "yotoqxona",
+      "image": "wardrobe"
+    },
+    {
+      "slug": "ofis",
+      "name": "Ofis mebelsi",
+      "parent": null,
+      "image": "shelf"
+    }
+  ],
+  "products": [
+    {
+      "slug": "archa-divani",
+      "sku": "UX-014",
+      "name": "«Archa» divani",
+      "category": "divanlar",
+      "price": 12900000,
+      "old_price": 14500000,
+      "material": "Yong'oq",
+      "dimensions": "220 × 95 × 85 sm",
+      "weight": "68 kg",
+      "stock": 4,
+      "status": "in_stock",
+      "is_new": false,
+      "is_featured": true,
+      "created_at": "2026-02-14T10:00:00+05:00",
+      "description": "Uch o'rinli «Archa» divani yong'oq daraxtidan qo'lda ishlangan karkas va zig'ir matoli yostiqlardan iborat. Har bir bog'lanish joyi an'anaviy yog'och o'ymakorligi usulida mahkamlanadi — mix va vint ishlatilmaydi. Yostiqlar qoplamasi yechilib, yuvish mumkin.",
+      "images": [
+        "sofa",
+        "hero",
+        "workshop"
+      ],
+      "variants": [
+        {
+          "name": "Yashil",
+          "color_hex": "#4a5d4e",
+          "price_delta": 0
+        },
+        {
+          "name": "Krem",
+          "color_hex": "#e4d8be",
+          "price_delta": 0
+        },
+        {
+          "name": "Kulrang",
+          "color_hex": "#8b8b83",
+          "price_delta": 350000
+        }
+      ]
+    },
+    {
+      "slug": "dala-kreslosi",
+      "sku": "UX-021",
+      "name": "«Dala» kreslosi",
+      "category": "kreslolar",
+      "price": 4800000,
+      "old_price": null,
+      "material": "Eman",
+      "dimensions": "78 × 80 × 92 sm",
+      "weight": "21 kg",
+      "stock": 7,
+      "status": "in_stock",
+      "is_new": true,
+      "is_featured": false,
+      "created_at": "2026-02-20T10:00:00+05:00",
+      "description": "«Dala» — eman daraxtidan yasalgan, teri bilan qoplangan dam olish kreslosi. Egilgan orqa suyanchig'i belga tabiiy tayanch beradi. Teri vaqti bilan chiroyli «qarish» rangiga kiradi — bu tabiiy jarayon.",
+      "images": [
+        "armchair",
+        "workshop"
+      ],
+      "variants": [
+        {
+          "name": "Karamel",
+          "color_hex": "#b0793f",
+          "price_delta": 0
+        },
+        {
+          "name": "Qora",
+          "color_hex": "#2e2a26",
+          "price_delta": 420000
+        }
+      ]
+    },
+    {
+      "slug": "sahro-stoli",
+      "sku": "UX-008",
+      "name": "«Sahro» stoli",
+      "category": "oshxona",
+      "price": 8400000,
+      "old_price": null,
+      "material": "Yong'oq",
+      "dimensions": "200 × 100 × 75 sm",
+      "weight": "74 kg",
+      "stock": 3,
+      "status": "in_stock",
+      "is_new": false,
+      "is_featured": true,
+      "created_at": "2026-02-01T10:00:00+05:00",
+      "description": "Sakkiz kishilik oilaviy stol. Stol usti bitta yaxlit yong'oq taxtadan yo'nib ishlangan, sirti tabiiy yog' bilan pardozlangan — issiq idish qo'yish mumkin. Oyoqlari yig'iladigan, ko'chishda qulay.",
+      "images": [
+        "table",
+        "chairs",
+        "workshop"
+      ],
+      "variants": []
+    },
+    {
+      "slug": "bahor-stullari",
+      "sku": "UX-033",
+      "name": "«Bahor» stullari (2 ta)",
+      "category": "stullar",
+      "price": 3200000,
+      "old_price": null,
+      "material": "Qayin",
+      "dimensions": "45 × 52 × 88 sm",
+      "weight": "5.4 kg",
+      "stock": 12,
+      "status": "in_stock",
+      "is_new": false,
+      "is_featured": false,
+      "created_at": "2026-01-18T10:00:00+05:00",
+      "description": "Qayin daraxtidan bukilgan orqa suyanchikli stullar juftligi. O'rindig'i to'qilgan ratan — yozda salqin, qishda iliq saqlaydi. Har bir stul 120 kg gacha yukka sinovdan o'tkaziladi.",
+      "images": [
+        "chairs",
+        "table",
+        "workshop"
+      ],
+      "variants": [
+        {
+          "name": "Tabiiy",
+          "color_hex": "#c9a46b",
+          "price_delta": 0
+        },
+        {
+          "name": "Yashil",
+          "color_hex": "#5a6e52",
+          "price_delta": 180000
+        }
+      ]
+    },
+    {
+      "slug": "orzu-karavoti",
+      "sku": "UX-005",
+      "name": "«Orzu» karavoti 160×200",
+      "category": "karavotlar",
+      "price": 15600000,
+      "old_price": null,
+      "material": "Yong'oq",
+      "dimensions": "170 × 212 × 96 sm",
+      "weight": "92 kg",
+      "stock": 0,
+      "status": "on_order",
+      "is_new": false,
+      "is_featured": true,
+      "created_at": "2026-02-10T10:00:00+05:00",
+      "description": "«Orzu» — ustaxonaning eng sevimli loyihasi. Bosh suyanchig'i yumshoq zig'ir mato bilan qoplangan, tagida ikkita katta tortma. Matras to'plamga kirmaydi; tayyorlanish muddati 25–30 kun.",
+      "images": [
+        "bed",
+        "wardrobe",
+        "workshop"
+      ],
+      "variants": [
+        {
+          "name": "Sut rang",
+          "color_hex": "#e8ddc8",
+          "price_delta": 0
+        },
+        {
+          "name": "Zaytun",
+          "color_hex": "#7a7d5c",
+          "price_delta": 600000
+        }
+      ]
+    },
+    {
+      "slug": "tog-shkafi",
+      "sku": "UX-041",
+      "name": "«Tog'» shkafi",
+      "category": "shkaflar",
+      "price": 11200000,
+      "old_price": null,
+      "material": "Eman",
+      "dimensions": "120 × 60 × 210 sm",
+      "weight": "110 kg",
+      "stock": 5,
+      "status": "in_stock",
+      "is_new": false,
+      "is_featured": false,
+      "created_at": "2026-01-12T10:00:00+05:00",
+      "description": "Ikki eshikli «Tog'» shkafi emandan yasalgan, eshiklari vertikal o'yiq naqshli. Ichida besh ta polka va kiyim iladigan moslama. Tutqichlari jez — qo'lda quyilgan.",
+      "images": [
+        "wardrobe",
+        "bed"
+      ],
+      "variants": []
+    },
+    {
+      "slug": "daryo-stoligi",
+      "sku": "UX-052",
+      "name": "«Daryo» stoligi",
+      "category": "stoliklar",
+      "price": 2950000,
+      "old_price": 3400000,
+      "material": "Yong'oq",
+      "dimensions": "Ø 90 × 45 sm",
+      "weight": "18 kg",
+      "stock": 9,
+      "status": "in_stock",
+      "is_new": true,
+      "is_featured": false,
+      "created_at": "2026-02-22T10:00:00+05:00",
+      "description": "Yumaloq «Daryo» stoligi — divan oldi uchun. Pastki qavati kitob va pult uchun, oyoqlari tokarlikda yo'nib ishlangan. Sirti qattiq mum bilan pardozlangan, iz qoldirmaydi.",
+      "images": [
+        "coffee",
+        "sofa"
+      ],
+      "variants": []
+    },
+    {
+      "slug": "bog-javoni",
+      "sku": "UX-060",
+      "name": "«Bog'» javonlari",
+      "category": "ofis",
+      "price": 3600000,
+      "old_price": null,
+      "material": "Qayin",
+      "dimensions": "180 × 25 × 80 sm",
+      "weight": "24 kg",
+      "stock": 6,
+      "status": "in_stock",
+      "is_new": false,
+      "is_featured": false,
+      "created_at": "2026-01-05T10:00:00+05:00",
+      "description": "Devorga o'rnatiladigan uch qavatli javonlar to'plami. Har bir javon 15 kg yuk ko'taradi, mahkamlash detallari komplektda. Kitob, idish va o'simliklar uchun birdek chiroyli.",
+      "images": [
+        "shelf",
+        "workshop"
+      ],
+      "variants": []
+    },
+    {
+      "slug": "oqtepa-ofis-stoli",
+      "sku": "UX-071",
+      "name": "«Oqtepa» ofis stoli",
+      "category": "ofis",
+      "price": 5400000,
+      "old_price": null,
+      "material": "Buk",
+      "dimensions": "140 × 70 × 75 sm",
+      "weight": "46 kg",
+      "stock": 4,
+      "status": "in_stock",
+      "is_new": false,
+      "is_featured": false,
+      "created_at": "2026-01-28T10:00:00+05:00",
+      "description": "Uy-ofis uchun ixcham ish stoli. O'ng tomonida ikkita tortma, orqa panelida kabellar uchun maxsus teshik va kanal. Buk daraxti — qattiq va barqaror material.",
+      "images": [
+        "table",
+        "shelf"
+      ],
+      "variants": []
+    },
+    {
+      "slug": "chimyon-kreslosi",
+      "sku": "UX-080",
+      "name": "«Chimyon» ish kreslosi",
+      "category": "ofis",
+      "price": 2700000,
+      "old_price": null,
+      "material": "Buk + teri",
+      "dimensions": "62 × 60 × 85 sm",
+      "weight": "12 kg",
+      "stock": 10,
+      "status": "in_stock",
+      "is_new": true,
+      "is_featured": false,
+      "created_at": "2026-02-24T10:00:00+05:00",
+      "description": "Buk daraxtidan egilgan karkasli ish kreslosi, o'rindig'i teri. Metall mexanizm o'rniga to'liq yog'och konstruksiyalar — skripillamaydi, yillar xizmat qiladi.",
+      "images": [
+        "armchair",
+        "chairs"
+      ],
+      "variants": [
+        {
+          "name": "Asal",
+          "color_hex": "#c98a3d",
+          "price_delta": 0
+        },
+        {
+          "name": "Tund",
+          "color_hex": "#3a3f3a",
+          "price_delta": 300000
+        }
+      ]
+    },
+    {
+      "slug": "zarafshon-divani",
+      "sku": "UX-092",
+      "name": "«Zarafshon» divani",
+      "category": "divanlar",
+      "price": 9800000,
+      "old_price": null,
+      "material": "Yasan",
+      "dimensions": "180 × 90 × 82 sm",
+      "weight": "54 kg",
+      "stock": 3,
+      "status": "in_stock",
+      "is_new": false,
+      "is_featured": false,
+      "created_at": "2026-01-20T10:00:00+05:00",
+      "description": "Ikki o'rinli ixcham divan — kichik mehmonxonalar uchun. Yasanning och sarg'ish tusi xonani yengillashtiradi. Qo'llari keng: choy piyola ham sig'adi.",
+      "images": [
+        "sofa",
+        "coffee"
+      ],
+      "variants": []
+    },
+    {
+      "slug": "yashil-burchak-divani",
+      "sku": "UX-003",
+      "name": "«Yashil» burchak divani",
+      "category": "divanlar",
+      "price": 18900000,
+      "old_price": 21000000,
+      "material": "Yong'oq",
+      "dimensions": "280 × 160 × 85 sm",
+      "weight": "118 kg",
+      "stock": 2,
+      "status": "in_stock",
+      "is_new": false,
+      "is_featured": true,
+      "created_at": "2026-02-05T10:00:00+05:00",
+      "description": "Katta oilalar uchun burchak divani: olti o'rin, ochiladigan yotoq bo'limi va ichki sandiq. Karkasi quritilgan yong'oq, yostiqlari o'rta qattiqlikda — erta tonggacha shaklini saqlaydi.",
+      "images": [
+        "hero",
+        "sofa",
+        "workshop"
+      ],
+      "variants": [
+        {
+          "name": "Yashil",
+          "color_hex": "#43584a",
+          "price_delta": 0
+        },
+        {
+          "name": "Antratsit",
+          "color_hex": "#4a4a48",
+          "price_delta": 500000
+        }
+      ]
+    },
+    {
+      "slug": "navroz-stul-toplam",
+      "sku": "UX-104",
+      "name": "«Navro'z» stul to'plami (4 ta)",
+      "category": "stullar",
+      "price": 5900000,
+      "old_price": null,
+      "material": "Eman",
+      "dimensions": "45 × 52 × 88 sm",
+      "weight": "5.8 kg",
+      "stock": 8,
+      "status": "in_stock",
+      "is_new": true,
+      "is_featured": false,
+      "created_at": "2026-02-26T10:00:00+05:00",
+      "description": "To'rtta emandan stul — «Sahro» stoli uchun ideal juftlik. Orqa suyanchig'idagi qo'l bilan o'yilgan naqsh har bir stulda biroz farq qiladi: bu seriyali emas, ustaxona ishi.",
+      "images": [
+        "chairs",
+        "workshop",
+        "table"
+      ],
+      "variants": []
+    },
+    {
+      "slug": "kumush-garderob",
+      "sku": "UX-115",
+      "name": "«Kumush» garderob",
+      "category": "shkaflar",
+      "price": 13400000,
+      "old_price": null,
+      "material": "Yasan",
+      "dimensions": "160 × 62 × 220 sm",
+      "weight": "140 kg",
+      "stock": 1,
+      "status": "in_stock",
+      "is_new": false,
+      "is_featured": false,
+      "created_at": "2026-01-08T10:00:00+05:00",
+      "description": "Uch bo'limli garderob: kiyim iladigan joy, tortmalar va oy nurlangan oynali eshik. Yasan daraxtining och tusi kichik yotoqxonani ham tor ko'rsatmaydi.",
+      "images": [
+        "wardrobe",
+        "shelf"
+      ],
+      "variants": []
+    }
+  ]
+}
