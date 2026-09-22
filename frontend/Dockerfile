@@ -1,9 +1,12 @@
+# Build context — loyiha root'i (docker-compose.yml: context: .), shuning uchun
+# yo'llar frontend/ va nginx/ bilan boshlanadi.
+
 # 1-bosqich: React (Vite) build
 FROM node:24-alpine AS build
 WORKDIR /app
-COPY package*.json ./
+COPY frontend/package*.json ./
 RUN npm ci
-COPY . .
+COPY frontend/ .
 RUN npm run build
 
 # 2-bosqich: Nginx bilan statikani tarqatish
