@@ -1,0 +1,23 @@
+node_modules/
+.next/
+dist/
+build/
+*.log
+
+# lokal
+.env
+.env.*
+!.env.example
+venv/
+.venv/
+__pycache__/
+db.sqlite3
+backend/media/
+backend/staticfiles/
+*.pem
+*.key
+secrets/
+docs/
+CLAUDE.local.md
+.claude/
+.pytest_cache/
