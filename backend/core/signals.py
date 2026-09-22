@@ -43,6 +43,10 @@ def connect_media_cleanup_signals(model, field_name: str = "image") -> None:
     """
     Berilgan model uchun media-tozalash signallarini ulaydi.
     dispatch_uid orqali signalning ikki marta ulanishi oldini olamiz.
+
+    weak=False shart: handler'lar shu funksiya ichidagi closure — Django sukut bo'yicha
+    ularni weak reference bilan saqlaydi va funksiya qaytgach GC ularni o'chirib yuboradi
+    (signal jimgina uziladi).
     """
 
     def pre_save_cleanup(sender, instance, **kwargs):
@@ -63,10 +67,12 @@ def connect_media_cleanup_signals(model, field_name: str = "image") -> None:
     pre_save.connect(
         pre_save_cleanup,
         sender=model,
+        weak=False,
         dispatch_uid=f"{model.__name__}.{field_name}.pre_save_cleanup",
     )
     post_delete.connect(
         post_delete_cleanup,
         sender=model,
+        weak=False,
         dispatch_uid=f"{model.__name__}.{field_name}.post_delete_cleanup",
     )
