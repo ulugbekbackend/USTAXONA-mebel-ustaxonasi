@@ -1,5 +1,7 @@
 # Ustaxona — mebel ustaxonasi uchun katalog va buyurtma sayti
 
+[![CI](https://github.com/ulugbekbackend/USTAXONA-mebel-ustaxonasi/actions/workflows/ci.yml/badge.svg)](https://github.com/ulugbekbackend/USTAXONA-mebel-ustaxonasi/actions/workflows/ci.yml)
+
 To'liq stek: **Django 5.2 LTS + DRF + PostgreSQL** (backend) va **React 19 + Vite** (frontend).
 Mebel yasaydigan usta uchun onlayn katalog, savat va buyurtma tizimi.
 
