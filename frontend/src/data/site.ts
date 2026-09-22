@@ -3,19 +3,20 @@
  * Katalog ma'lumotlari (kategoriya, mahsulot) backend API'dan keladi — src/lib/api.ts.
  */
 
-const U = (id: string) => `https://image.qwenlm.ai/generated-images/${id}/_result.png`;
+// Rasmlar frontend/public/images/ ichida — tashqi hostingga bog'liq emas.
+const U = (name: string) => `${import.meta.env.BASE_URL}images/${name}.webp`;
 
 export const IMG = {
-  hero: U("47c4b030-fb30-4c5f-9747-c2370dbd1fa3"),
-  sofa: U("dd77339e-83a4-4fbe-b17a-422d6cf7b9f8"),
-  armchair: U("2f29a921-0109-45d5-881a-85ebc88f9d52"),
-  table: U("083daa18-2940-4f3e-b999-17042c1b7503"),
-  chairs: U("e1c71237-4e6c-43df-b1d5-c4e2a2507083"),
-  bed: U("38998553-5807-49ba-8038-354e493adf93"),
-  wardrobe: U("eca14de8-21a8-4bd3-9dff-7d17cc8ac64a"),
-  coffee: U("9ad377bc-2f76-4837-b964-c0f6fe3c6aa5"),
-  shelf: U("c0156861-0581-4d9d-801a-e4fec3e95c43"),
-  workshop: U("031fd2e6-4434-4524-8691-840cfa3c122b"),
+  hero: U("hero"),
+  sofa: U("sofa"),
+  armchair: U("armchair"),
+  table: U("table"),
+  chairs: U("chairs"),
+  bed: U("bed"),
+  wardrobe: U("wardrobe"),
+  coffee: U("coffee"),
+  shelf: U("shelf"),
+  workshop: U("workshop"),
 };
 
 export const MATERIALS = ["Yong'oq", "Eman", "Qayin", "Buk", "Yasan"];
