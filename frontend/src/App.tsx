@@ -2,7 +2,7 @@ import { useEffect, type ReactNode } from "react";
 import { BrowserRouter, Link, Route, Routes, useLocation } from "react-router-dom";
 import { CartDrawer, Footer, Header, ToastHost } from "./components/chrome";
 import { CartProvider } from "./lib/cart";
-import { LangProvider } from "./lib/i18n";
+import { LangProvider, useI18n } from "./lib/i18n";
 import Home from "./pages/Home";
 import CartPage from "./pages/Cart";
 import CategoryPage from "./pages/Category";
@@ -11,16 +11,17 @@ import ContactPage from "./pages/Contact";
 import ProductPage from "./pages/Product";
 
 function NotFound() {
+  const { t } = useI18n();
   return (
     <div className="mx-auto flex max-w-2xl flex-col items-center px-4 py-28 text-center">
       <p className="font-mono text-sm uppercase tracking-[0.3em] text-amber-600">404</p>
-      <h1 className="mt-3 font-display text-4xl font-bold">Bunday sahifa yo'q</h1>
-      <p className="mt-3 text-ink-500">Manzil noto'g'ri kiritilgan yoki sahifa ko'chirilgan.</p>
+      <h1 className="mt-3 font-display text-4xl font-bold">{t("not_found_t")}</h1>
+      <p className="mt-3 text-ink-500">{t("not_found_d")}</p>
       <Link
         to="/"
         className="mt-8 rounded-md border border-pine-900 bg-amber-400 px-6 py-3 font-display font-bold text-pine-950 shadow-hard-sm"
       >
-        Bosh sahifaga
+        {t("go_home")}
       </Link>
     </div>
   );
