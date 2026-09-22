@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib import admin
 from django.db import transaction
+from django.db.models import Count
 
 from orders.models import ContactMessage, Customer, Order, OrderItem
 
@@ -72,9 +73,12 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display = ["full_name", "phone", "address", "created_at", "orders_count"]
     search_fields = ["full_name", "phone", "address"]
 
-    @admin.display(description="Buyurtmalar")
+    def get_queryset(self, request):
+        return super().get_queryset(request).annotate(orders_total=Count("orders"))
+
+    @admin.display(description="Buyurtmalar", ordering="orders_total")
     def orders_count(self, obj):
-        return obj.orders.count()
+        return obj.orders_total
 
 
 @admin.register(ContactMessage)

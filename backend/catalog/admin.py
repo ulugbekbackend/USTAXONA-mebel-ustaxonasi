@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db.models import Count
 
 from catalog.models import Category, Product, ProductImage, ProductVariant
 
@@ -19,10 +20,14 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ["name", "slug"]
     prepopulated_fields = {"slug": ("name",)}
     list_filter = ["parent"]
+    list_select_related = ["parent"]
 
-    @admin.display(description="Mahsulotlar")
+    def get_queryset(self, request):
+        return super().get_queryset(request).annotate(products_total=Count("products"))
+
+    @admin.display(description="Mahsulotlar", ordering="products_total")
     def products_count(self, obj):
-        return obj.products.count()
+        return obj.products_total
 
 
 @admin.register(Product)

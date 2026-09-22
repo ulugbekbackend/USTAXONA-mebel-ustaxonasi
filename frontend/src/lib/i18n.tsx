@@ -2,12 +2,15 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from "react";
 
 export type Lang = "uz" | "ru";
+
+const STORAGE_KEY = "ux-lang";
 
 const uz = {
   nav_home: "Bosh sahifa",
@@ -51,7 +54,7 @@ const uz = {
   why2_t: "Qo'l mehnati",
   why2_d: "Har bir bog'lanish qo'lda mahkamlanadi — mix va vint deyarli ishlatilmaydi.",
   why3_t: "Aniq o'lchov",
-  why3_d: "Mebelingiz milimetrgacha xonangizga mos qilib yasaladi.",
+  why3_d: "Mebelingiz millimetrgacha xonangizga mos qilib yasaladi.",
   why4_t: "Halol kafolat",
   why4_d: "2 yil kafolat. Biror joyi g'ijirlasa — bepul kelib tuzatamiz.",
   reviews_title: "Mijozlar so'zi",
@@ -74,7 +77,6 @@ const uz = {
   from: "dan",
   to: "gacha",
   material_label: "Material",
-  availability: "Mavjudlik",
   only_in_stock: "Faqat omborda borlari",
   sort_label: "Saralash",
   sort_new: "Eng yangi",
@@ -115,8 +117,6 @@ const uz = {
   cart_empty_t: "Savat hozircha bo'sh",
   cart_empty_d: "Katalogdan birorta mebel tanlang — usta sizni kutmoqda.",
   continue_shopping: "Xaridni davom ettirish",
-  item: "Mahsulot",
-  line_total: "Jami",
   subtotal: "Oraliq jami",
   delivery_row: "Yetkazib berish",
   delivery_calc: "Usta bilan kelishiladi",
@@ -160,14 +160,11 @@ const uz = {
   map_hint: "Chilonzor-9, bozor orqasi — xaritada qidiring: «Ustaxona mebel»",
   field_required: "Bu maydon to'ldirilishi shart",
   phone_invalid: "Telefon raqamini to'g'ri kiriting (masalan: +998 90 123 45 67)",
-  your_order: "Savatingizdagi mahsulotlar",
   quick_add: "Tez qo'shish",
   badge_new: "Yangi",
   badge_sale: "Chegirma",
   badge_top: "Top",
-  lang_switch: "Til",
   free_delivery: "Toshkent bo'ylab bepul yetkazish",
-  hand_made: "Har bir dona qo'lda ishlangan",
   eco_note: "Tabiiy yog' va mum bilan pardozlanadi",
   telegram_us: "Telegram'da yozing",
 };
@@ -185,7 +182,7 @@ const ru: typeof uz = {
   hero_l1: "Дарим дереву",
   hero_l2: "вторую жизнь.",
   hero_sub:
-    "Каждое изделие делаем вручную в нашей мастерской — из ореха, дуба и берёзы. Без гвоздей, без спешки — на generations вперёд.",
+    "Каждое изделие делаем вручную в нашей мастерской — из ореха, дуба и берёзы. Без гвоздей, без спешки — на поколения вперёд.",
   cta_catalog: "Смотреть каталог",
   cta_order: "Оформить заказ",
   stat_years: "лет опыта",
@@ -223,7 +220,7 @@ const ru: typeof uz = {
     "Пришлите фото или просто опишите словами — мастер бесплатно посоветует и посчитает цену.",
   cta_band_btn: "Поговорить с мастером",
   footer_about:
-    "Устaxона — семейная мебельная мастерская в Ташкенте. С 2009 года делаем мебель вручную из натурального дерева.",
+    "Ustaxona — семейная мебельная мастерская в Ташкенте. С 2009 года делаем мебель вручную из натурального дерева.",
   footer_cats: "Категории",
   footer_pages: "Страницы",
   footer_contact: "Контакты",
@@ -237,7 +234,6 @@ const ru: typeof uz = {
   from: "от",
   to: "до",
   material_label: "Материал",
-  availability: "Наличие",
   only_in_stock: "Только в наличии",
   sort_label: "Сортировка",
   sort_new: "Сначала новые",
@@ -278,8 +274,6 @@ const ru: typeof uz = {
   cart_empty_t: "Корзина пока пуста",
   cart_empty_d: "Выберите мебель из каталога — мастер уже ждёт.",
   continue_shopping: "Продолжить покупки",
-  item: "Товар",
-  line_total: "Итого",
   subtotal: "Промежуточный итог",
   delivery_row: "Доставка",
   delivery_calc: "По договорённости с мастером",
@@ -323,14 +317,11 @@ const ru: typeof uz = {
   map_hint: "Чиланзар-9, за рынком — ищите на карте: «Ustaxona mebel»",
   field_required: "Это поле обязательно",
   phone_invalid: "Введите телефон правильно (например: +998 90 123 45 67)",
-  your_order: "Товары в корзине",
   quick_add: "Быстро добавить",
   badge_new: "Новинка",
   badge_sale: "Скидка",
   badge_top: "Топ",
-  lang_switch: "Язык",
   free_delivery: "Бесплатная доставка по Ташкенту",
-  hand_made: "Каждое изделие — вручную",
   eco_note: "Покрытие — натуральные масла и воск",
   telegram_us: "Написать в Telegram",
 };
@@ -348,14 +339,25 @@ const Ctx = createContext<LangCtx | null>(null);
 
 export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => {
-    const saved = localStorage.getItem("ux-lang");
-    return saved === "ru" ? "ru" : "uz";
+    try {
+      return localStorage.getItem(STORAGE_KEY) === "ru" ? "ru" : "uz";
+    } catch {
+      return "uz";
+    }
   });
+
+  // Saqlangan til sahifa ochilganda ham <html lang> ga yoziladi (ekran o'quvchilar, SEO).
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   const setLang = useCallback((l: Lang) => {
     setLangState(l);
-    localStorage.setItem("ux-lang", l);
-    document.documentElement.lang = l;
+    try {
+      localStorage.setItem(STORAGE_KEY, l);
+    } catch {
+      /* private rejim — til faqat shu sessiyada saqlanadi */
+    }
   }, []);
 
   const t = useCallback((key: TKey) => dictionaries[lang][key] ?? key, [lang]);

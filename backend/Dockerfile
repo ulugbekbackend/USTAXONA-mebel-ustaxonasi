@@ -12,7 +12,12 @@ RUN apt-get update \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+# Ilova root huquqisiz ishlaydi; media va staticfiles volume'lari shu foydalanuvchiga tegishli.
+RUN useradd --create-home --uid 1000 app \
+    && mkdir -p /app/media /app/staticfiles \
+    && chown -R app:app /app
+COPY --chown=app:app . .
+USER app
 
 EXPOSE 8000
 

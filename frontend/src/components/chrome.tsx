@@ -58,7 +58,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40">
-      {/* Yuqori lentа */}
+      {/* Yuqori lenta */}
       <div className="grain-dark border-b border-pine-700/60 bg-pine-950 text-bone-100">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-1.5 font-mono text-[11px] sm:px-6">
           <span className="hidden items-center gap-1.5 sm:flex">

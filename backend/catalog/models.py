@@ -148,6 +148,7 @@ class ProductVariant(models.Model):
     class Meta:
         verbose_name = "Variant"
         verbose_name_plural = "Variantlar"
+        ordering = ["id"]
 
     def __str__(self):
         return f"{self.product.name} — {self.name}"

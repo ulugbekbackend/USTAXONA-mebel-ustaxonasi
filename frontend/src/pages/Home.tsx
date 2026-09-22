@@ -21,7 +21,7 @@ const MARQUEE = [
   "Tabiiy teri", "Ratan", "Zig'ir mato", "Jez detallar",
 ];
 
-const STEPS_UZ = [
+const STEPS = [
   { t: "step1_t", d: "step1_d" },
   { t: "step2_t", d: "step2_d" },
   { t: "step3_t", d: "step3_d" },
@@ -82,7 +82,7 @@ function Stamp() {
         <circle cx="60" cy="60" r="58" fill="var(--color-pine-950)" stroke="var(--color-amber-400)" strokeWidth="1.5" />
         <circle cx="60" cy="60" r="33" fill="none" stroke="var(--color-amber-400)" strokeWidth="1" strokeDasharray="3 4" />
         <text fill="var(--color-amber-300)" fontSize="10.5" fontFamily="IBM Plex Mono, monospace" letterSpacing="2.5">
-          <textPath href="#stampCircle">QO'LDA YASALGAN • TOSHRENT USTAXONASI • 2009 •</textPath>
+          <textPath href="#stampCircle">QO'LDA YASALGAN • TOSHKENT USTAXONASI • 2009 •</textPath>
         </text>
         <path d="M52 46v14a8 8 0 0 0 16 0V46" fill="none" stroke="var(--color-amber-400)" strokeWidth="4.5" strokeLinecap="round" />
       </svg>
@@ -349,7 +349,7 @@ export default function Home() {
           </div>
           <ol className="relative space-y-8">
             <span className="absolute bottom-4 left-[1.35rem] top-4 hidden w-px bg-pine-700 sm:block" />
-            {STEPS_UZ.map((s, i) => (
+            {STEPS.map((s, i) => (
               <li
                 key={s.t}
                 data-reveal
