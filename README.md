@@ -97,8 +97,8 @@ pip install -r requirements-dev.txt
 cp .env.example .env        # SECRET_KEY ni almashtiring; lokal'da DB_ENGINE=sqlite
 
 python manage.py migrate
-python manage.py seed_demo            # demo kategoriya, mahsulot va rasmlar (internet kerak)
-# python manage.py seed_demo --no-images  # internet bo'lmasa — rasmsiz
+python manage.py seed_demo            # demo kategoriya, mahsulot va rasmlar
+# python manage.py seed_demo --no-images  # rasmsiz
 python manage.py createsuperuser
 python manage.py runserver  # http://127.0.0.1:8000  (admin: /admin, API: /api/docs)
 ```
@@ -149,3 +149,7 @@ Backup (cron): `0 3 * * * /path/to/scripts/backup-db.sh` — har kuni 03:00 da, 
 `ALLOWED_HOSTS`/`CORS_ALLOWED_ORIGINS` faqat .env'dagi domenlarga ochiq.
 DRF throttling (anon 3000/soat, buyurtma 10/soat) proxy ortida mijozning haqiqiy IP'si
 bo'yicha ishlaydi (`NUM_PROXIES`).
+
+## Litsenziya
+
+[MIT](LICENSE) © 2026 Ulug'bek — [ulugbekdev.uz](https://ulugbekdev.uz)
