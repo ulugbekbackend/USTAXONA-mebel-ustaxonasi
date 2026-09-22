@@ -79,6 +79,11 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     ordering_fields = ["price", "created_at", "name"]
     ordering = ["-created_at"]
 
+    def filter_queryset(self, queryset):
+        # Saralash maydoni teng bo'lgan mahsulotlar sahifalar orasida takrorlanmasin/yo'qolmasin.
+        queryset = super().filter_queryset(queryset)
+        return queryset.order_by(*queryset.query.order_by, "-id")
+
     def get_serializer_class(self):
         if self.action == "retrieve":
             return ProductDetailSerializer
