@@ -1,0 +1,9 @@
+# Repo'da qator oxirlari LF. Shell skriptlar va Docker fayllari Windows'da ham LF qoladi —
+# aks holda konteyner ichida "bad interpreter" xatosi chiqadi.
+* text=auto eol=lf
+*.sh text eol=lf
+Dockerfile text eol=lf
+*.png binary
+*.jpg binary
+*.webp binary
+*.svg text
