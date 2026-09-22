@@ -1,0 +1,82 @@
+# Ustaxona — to'liq stek: PostgreSQL + Django backend + Nginx frontend
+# Tayyorlash:  cp .env.example .env  va  cp backend/.env.example backend/.env  (to'ldiring)
+# Ishga tushirish:  docker compose up -d --build
+# Birinchi ishga tushirishda:  docker compose exec backend python manage.py createsuperuser
+#
+# Domen root .env'dagi DOMAIN'dan olinadi (default: example.com — placeholder). Domen olingach faqat
+# .env o'zgartiriladi. HTTPS'siz lokal sinov (http://localhost:8080) uchun USE_HTTPS=False.
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-ustaxona}
+      POSTGRES_USER: ${POSTGRES_USER:-ustaxona}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?root .env faylida POSTGRES_PASSWORD yozilmagan}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      DB_ENGINE: postgres  # backend/.env dagi lokal DB_ENGINE=sqlite ni bekor qiladi
+      DB_HOST: db
+      DB_NAME: ${POSTGRES_DB:-ustaxona}
+      DB_USER: ${POSTGRES_USER:-ustaxona}
+      DB_USER_PASSWORD: ${POSTGRES_PASSWORD:?root .env faylida POSTGRES_PASSWORD yozilmagan}
+      DEBUG: "False"
+      USE_HTTPS: ${USE_HTTPS:-True}
+      # Oldida bitta proxy turadi: nginx (8080) yoki Traefik (/api, /admin) —
+      # throttling mijozning haqiqiy IP'sini shu orqali aniqlaydi.
+      NUM_PROXIES: "1"
+      ALLOWED_HOSTS: localhost,127.0.0.1,${DOMAIN:-example.com}
+      CSRF_TRUSTED_ORIGINS: http://localhost:8080,https://${DOMAIN:-example.com}
+      SITE_URL: ${SITE_URL:-http://localhost:8080}
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput &&
+             gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3"
+    volumes:
+      - media_data:/app/media
+      - static_data:/app/staticfiles
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    # Traefik ishlatilsa (ixtiyoriy). /media va /static bu yerda EMAS — ularni
+    # frontend Nginx volume'dan beradi (gunicorn DEBUG=False'da media bermaydi).
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ustaxona-api.rule=Host(`${DOMAIN:-example.com}`) && (PathPrefix(`/api`) || PathPrefix(`/admin`))"
+      - "traefik.http.routers.ustaxona-api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.ustaxona-api.loadbalancer.server.port=8000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    volumes:
+      - media_data:/var/www/media:ro
+      - static_data:/var/www/static:ro
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ustaxona-web.rule=Host(`${DOMAIN:-example.com}`)"
+      - "traefik.http.routers.ustaxona-web.tls.certresolver=letsencrypt"
+      - "traefik.http.services.ustaxona-web.loadbalancer.server.port=80"
+
+volumes:
+  pgdata:
+  media_data:
+  static_data:

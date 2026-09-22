@@ -1,0 +1,14 @@
+# Image'ga sirlar va lokal fayllar tushmasin
+venv/
+.venv/
+.env
+.env.*
+!.env.example
+db.sqlite3
+media/
+staticfiles/
+**/__pycache__
+.pytest_cache/
+tests/
+requirements-dev.txt
+pytest.ini

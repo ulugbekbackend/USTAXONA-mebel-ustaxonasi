@@ -1,0 +1,254 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bricolage Grotesque", "Manrope", sans-serif;
+  --font-sans: "Manrope", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+
+  --color-pine-950: #0e1511;
+  --color-pine-900: #15201a;
+  --color-pine-800: #1d2c23;
+  --color-pine-700: #29402f;
+  --color-pine-600: #3c5a45;
+  --color-pine-500: #557a5f;
+  --color-pine-300: #9db8a5;
+  --color-pine-200: #c3d2c6;
+  --color-pine-100: #dee7df;
+
+  --color-bone-50: #faf7ee;
+  --color-bone-100: #f3edde;
+  --color-bone-200: #e7dec8;
+  --color-bone-300: #d5c7a9;
+
+  --color-amber-300: #f0c36b;
+  --color-amber-400: #e5ac45;
+  --color-amber-500: #d3931f;
+  --color-amber-600: #a96f14;
+
+  --color-clay-400: #c67b52;
+  --color-clay-500: #a95b34;
+
+  --color-ink-900: #191410;
+  --color-ink-700: #35302a;
+  --color-ink-500: #6b6459;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-bone-100 text-ink-900 font-sans antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-amber-400);
+  color: var(--color-pine-950);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bone-100);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-bone-300);
+  border-radius: 8px;
+  border: 2px solid var(--color-bone-100);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-amber-500);
+}
+
+/* ---- Ambient texture: nozik shovqin qatlami ---- */
+.noise-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Yog'och tolalari (qorong'i bo'limlar uchun) ---- */
+.grain-dark {
+  background-image:
+    repeating-linear-gradient(
+      94deg,
+      rgba(240, 195, 107, 0.035) 0px,
+      rgba(240, 195, 107, 0.035) 1px,
+      transparent 1px,
+      transparent 12px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.016) 0px,
+      rgba(255, 255, 255, 0.016) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+}
+
+/* ---- Harakat tizimi ---- */
+@keyframes rise-line {
+  from {
+    transform: translateY(112%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    transform: scale(1.09) translate(1.4%, -1.4%);
+  }
+}
+@keyframes marquee-x {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes badge-pop {
+  0% {
+    transform: scale(0.4);
+  }
+  60% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes shimmer {
+  from {
+    background-position: -400px 0;
+  }
+  to {
+    background-position: 400px 0;
+  }
+}
+
+.mask-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+.mask-line > span {
+  display: block;
+  transform: translateY(112%);
+  animation: rise-line 0.95s cubic-bezier(0.19, 0.7, 0.22, 1) forwards;
+}
+
+.kenburns {
+  animation: kenburns 17s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 32s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.spin-slow {
+  animation: spin-slow 24s linear infinite;
+}
+
+.badge-pop {
+  animation: badge-pop 0.45s cubic-bezier(0.2, 0.8, 0.3, 1.2);
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bone-200) 25%,
+    var(--color-bone-100) 50%,
+    var(--color-bone-200) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+/* ---- Scroll-reveal ---- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.16, 0.7, 0.3, 1);
+}
+[data-reveal="left"] {
+  transform: translateX(-34px);
+}
+[data-reveal="right"] {
+  transform: translateX(34px);
+}
+[data-reveal="zoom"] {
+  transform: scale(0.94);
+}
+[data-reveal].in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Usta muhri (hard shadow) ---- */
+.shadow-hard {
+  box-shadow: 6px 6px 0 var(--color-pine-900);
+}
+.shadow-hard-sm {
+  box-shadow: 3px 3px 0 var(--color-pine-900);
+}
+.shadow-hard-amber {
+  box-shadow: 6px 6px 0 var(--color-amber-500);
+}
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.35s ease;
+}
+.link-underline:hover {
+  background-size: 100% 1.5px;
+}
+
+/* ---- Kam-harakat rejimi ---- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .mask-line > span {
+    transform: none;
+    animation: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
