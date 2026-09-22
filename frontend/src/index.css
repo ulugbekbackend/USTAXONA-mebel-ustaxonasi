@@ -201,7 +201,7 @@ body {
 [data-reveal="zoom"] {
   transform: scale(0.94);
 }
-[data-reveal].in {
+[data-reveal][data-shown] {
   opacity: 1;
   transform: none;
 }

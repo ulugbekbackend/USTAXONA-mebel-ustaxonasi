@@ -27,19 +27,37 @@ function NotFound() {
   );
 }
 
-/** Scroll-reveal kuzatuvchisi + sahifa almashganda tepaga qaytarish. */
-function Shell({ children }: { children: ReactNode }) {
-  const location = useLocation();
-
+/**
+ * Scroll-reveal: `[data-reveal]` elementlar ekranga kirganda `data-shown` oladi (index.css).
+ * Kuzatuvchi bitta va MutationObserver bilan ishlaydi — API javobidan keyin chizilgan
+ * kartalar ham ushlanadi. Belgi atributda, className'da emas: React qayta chizganda
+ * className'ni almashtiradi va ko'ringan element yana yashirinib qolardi.
+ */
+function useScrollReveal() {
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "auto" });
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const show = (el: Element) => el.setAttribute("data-shown", "");
+
+    if (
+      !("IntersectionObserver" in window) ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      const showAll = () => document.querySelectorAll("[data-reveal]:not([data-shown])").forEach(show);
+      showAll();
+      const mo = new MutationObserver(showAll);
+      mo.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ["data-reveal"],
+      });
+      return () => mo.disconnect();
+    }
 
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((en) => {
           if (en.isIntersecting) {
-            en.target.classList.add("in");
+            show(en.target);
             io.unobserve(en.target);
           }
         });
@@ -47,17 +65,44 @@ function Shell({ children }: { children: ReactNode }) {
       { threshold: 0.12, rootMargin: "0px 0px -36px 0px" }
     );
 
-    const timer = window.setTimeout(() => {
-      document.querySelectorAll("[data-reveal]:not(.in)").forEach((el) => {
-        if (reduce) el.classList.add("in");
-        else io.observe(el);
-      });
-    }, 60);
+    const watch = (root: ParentNode) =>
+      root.querySelectorAll("[data-reveal]:not([data-shown])").forEach((el) => io.observe(el));
+
+    watch(document);
+    const watchNode = (node: Node) => {
+      if (!(node instanceof Element)) return;
+      if (node.matches("[data-reveal]:not([data-shown])")) io.observe(node);
+      watch(node);
+    };
+    // React skeleton'dagi div'ni qayta ishlatib, unga data-reveal qo'shishi mumkin —
+    // yangi tugun qo'shilmaydi, shuning uchun atribut o'zgarishi ham kuzatiladi.
+    const mo = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.type === "attributes") watchNode(m.target);
+        else m.addedNodes.forEach(watchNode);
+      }
+    });
+    mo.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["data-reveal"],
+    });
 
     return () => {
-      window.clearTimeout(timer);
+      mo.disconnect();
       io.disconnect();
     };
+  }, []);
+}
+
+/** Sahifa karkasi: scroll-reveal + sahifa almashganda tepaga qaytarish. */
+function Shell({ children }: { children: ReactNode }) {
+  const location = useLocation();
+  useScrollReveal();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [location.pathname, location.search]);
 
   return (
